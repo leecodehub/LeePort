@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#07131f" />
+    <title>Off the shelf — Steven B. Lee</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      :root {
+        --green: #0b2c21;
+        --green-light: #184533;
+        --ink: #eef6ef;
+        --soft: #c6d9cd;
+        --muted: #8aa698;
+        --accent: #bda8ea;
+        --accent-2: #f3e7d1;
+        --line: rgb(226 242 232 / 0.18);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 1.5rem;
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse at 78% 4%, rgb(133 190 146 / 0.14), transparent 44%),
+          radial-gradient(ellipse at 18% 100%, rgb(17 63 45 / 0.7), transparent 55%),
+          linear-gradient(155deg, #123b2c 0%, #0a2a20 56%, #061810 100%);
+        color: var(--ink);
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        line-height: 1.65;
+      }
+      .grain {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.35;
+        background-image: radial-gradient(rgb(255 255 255 / 0.12) 0.5px, transparent 0.5px);
+        background-size: 5px 5px;
+        mask-image: radial-gradient(ellipse at center, transparent 30%, black 90%);
+      }
+      main {
+        position: relative;
+        z-index: 1;
+        width: min(640px, 100%);
+        text-align: center;
+      }
+      .fan {
+        position: relative;
+        width: 220px;
+        height: 260px;
+        margin: 0 auto 1.6rem;
+      }
+      .card {
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        width: 150px;
+        height: 218px;
+        border: 1px solid rgb(255 255 255 / 0.12);
+        border-radius: 12px;
+        background: linear-gradient(150deg, #171819, #050606 62%, #0d0e0e);
+        box-shadow: 0 18px 34px -20px rgb(0 0 0 / 0.9);
+        transform-origin: 50% 100%;
+      }
+      .card:nth-child(1) {
+        transform: translateX(-50%) rotate(-24deg);
+        opacity: 0.55;
+      }
+      .card:nth-child(2) {
+        transform: translateX(-50%) rotate(-11deg);
+        opacity: 0.75;
+      }
+      .card:nth-child(3) {
+        transform: translateX(-50%) rotate(2deg);
+      }
+      .card span {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        color: var(--accent);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 2.4rem;
+        line-height: 0.8;
+      }
+      .card:nth-child(2) span {
+        color: var(--accent-2);
+      }
+      .card:nth-child(3) span {
+        color: #9ed7ea;
+      }
+      .card::after {
+        position: absolute;
+        right: 18px;
+        bottom: 16px;
+        color: rgb(255 255 255 / 0.16);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 4.4rem;
+        line-height: 1;
+        content: '?';
+      }
+      .pivot {
+        position: absolute;
+        right: 50%;
+        bottom: 0;
+        width: 14px;
+        height: 14px;
+        border: 1px solid rgb(242 226 188 / 0.6);
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #f2e2bc, #8a7448 48%, #241f17);
+        box-shadow: 0 0 0 4px rgb(4 20 13 / 0.58);
+        transform: translateX(50%);
+      }
+      .eyebrow {
+        margin: 0 0 0.7rem;
+        color: var(--muted);
+        font-family: ui-monospace, 'Cascadia Code', monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: clamp(2.6rem, 8vw, 4.4rem);
+        font-weight: 400;
+        line-height: 0.95;
+        letter-spacing: -0.05em;
+      }
+      h1 em {
+        color: var(--soft);
+        font-weight: 400;
+      }
+      p.copy {
+        max-width: 40ch;
+        margin: 1.1rem auto 0;
+        color: var(--soft);
+        font-size: 0.95rem;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-top: 1.8rem;
+      }
+      a {
+        color: var(--ink);
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0.65rem 1rem;
+        border: 1px solid var(--ink);
+        background: var(--ink);
+        color: var(--green);
+        font-size: 0.84rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .button:hover {
+        background: #fff;
+      }
+      .quiet {
+        min-height: 44px;
+        padding: 0.65rem 0.4rem;
+        color: var(--soft);
+        font-size: 0.8rem;
+      }
+      .note {
+        margin-top: 2rem;
+        color: rgb(198 217 205 / 0.44);
+        font-family: ui-monospace, 'Cascadia Code', monospace;
+        font-size: 0.52rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      :focus-visible {
+        outline: 2px solid var(--accent-2);
+        outline-offset: 4px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <main>
+      <div class="fan" aria-hidden="true">
+        <div class="card"><span>K</span></div>
+        <div class="card"><span>A</span></div>
+        <div class="card"><span>Q</span></div>
+        <div class="pivot"></div>
+      </div>
+      <p class="eyebrow">Lost card / 404</p>
+      <h1>Off the <em>shelf.</em></h1>
+      <p class="copy">
+        This page is not in the pack. Head back to the shelf and choose a different card.
+      </p>
+      <div class="actions">
+        <a class="button" href="/">Back to the pack shelf</a>
+        <a class="quiet" href="mailto:leesprospects@gmail.com">Email Steven</a>
+      </div>
+      <p class="note">No invented pages. No dead ends beyond this one.</p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Replace with your deployed domain and enable a sitemap once you have one.
